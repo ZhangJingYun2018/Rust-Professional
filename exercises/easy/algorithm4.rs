@@ -50,13 +50,53 @@ where
 
     // Insert a value into the BST
     fn insert(&mut self, value: T) {
-        //TODO
+        let  node = Some(Box::new(TreeNode::new(value)));
+        if self.root.is_none() {
+            self.root = node;
+            return;
+        }
+        let mut current = &mut self.root;
+        while let Some(ref mut n) = current {
+            match node.as_ref().unwrap().value.cmp(&n.value) {
+                Ordering::Equal => {
+                    //节点已经存在，不再插入
+                    return;
+                }
+                Ordering::Less => {
+                    if n.left.is_none() {
+                        n.left = node;
+                        return;
+                    }
+                    current = &mut n.left;
+                }
+                Ordering::Greater => {
+                    if n.right.is_none() {
+                        n.right = node;
+                        return;
+                    }
+                    current = &mut n.right;
+                }
+            }
+        }
     }
 
     // Search for a value in the BST
     fn search(&self, value: T) -> bool {
-        //TODO
-        true
+        let mut current = &self.root;
+        while let Some(ref n) = current {
+            match value.cmp(&n.value) {
+                Ordering::Equal => {
+                    return true;
+                }
+                Ordering::Less => {
+                    current = &n.left;
+                }
+                Ordering::Greater => {
+                    current = &n.right;
+                }
+            }
+        }
+        false
     }
 }
 

@@ -13,7 +13,29 @@ use std::fmt::{self, Display, Formatter};
 
 pub fn intersection(nums1: Vec<i32>, nums2: Vec<i32>) -> Vec<i32> {
     // TODO: Implement the logic to find the intersection of two arrays
-    Vec::new() // Placeholder return value
+    // You can use sorting, hash sets, or the two-pointer technique.
+   //使用set去除重复元素
+    let mut set1: Vec<i32> = nums1;
+    set1.sort();
+    let mut set2: Vec<i32> = nums2;
+    set2.sort();
+    let mut result: Vec<i32> = Vec::new();
+    let mut i = 0;
+    let mut j = 0;
+    while i < set1.len() && j < set2.len() {
+        if set1[i] == set2[j] {
+            if result.len() == 0 || result[result.len() - 1]!= set1[i] {
+                result.push(set1[i]);
+            }
+            i += 1;
+            j += 1;
+        } else if set1[i] < set2[j] {
+            i += 1;
+        } else {
+            j += 1;
+        }
+    }
+    result // Placeholder return value
 }
 
 #[cfg(test)]

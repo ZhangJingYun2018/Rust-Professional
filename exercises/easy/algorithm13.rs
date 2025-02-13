@@ -15,7 +15,15 @@ use std::fmt::{self, Display, Formatter};
 
 pub fn are_anagrams(s1: String, s2: String) -> bool {
     // TODO: Implement the logic to check if two strings are anagrams
-    false // Placeholder return value
+    let mut s1 = s1.to_lowercase().chars().filter(|c| c.is_alphabetic()).collect::<Vec<char>>();
+    let mut s2 = s2.to_lowercase().chars().filter(|c| c.is_alphabetic()).collect::<Vec<char>>();
+    if s1.len() != s2.len() {
+        return false;
+    }
+    // sort the string and compare
+    s1.sort();
+    s2.sort();
+    s1 == s2
 }
 
 #[cfg(test)]

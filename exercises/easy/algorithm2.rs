@@ -73,7 +73,23 @@ impl<T> LinkedList<T> {
         }
     }
 	pub fn reverse(&mut self){
-		// TODO
+		if self.length <= 1 {
+            return; // 如果链表为空，直接返回
+        }
+       //翻转双向链表
+        let mut current = self.start;
+        while let Some(mut node) = current {
+            unsafe{
+                let next = node.as_mut().next;
+                std::mem::swap(&mut node.as_mut().prev, &mut node.as_mut().next);
+                current = next;
+             }
+        }
+        unsafe{
+        self.start.unwrap().as_mut().next =  None;
+        self.end.unwrap().as_mut().prev = self.start;
+        std::mem::swap(&mut self.start, &mut self.end);
+        }
 	}
 }
 

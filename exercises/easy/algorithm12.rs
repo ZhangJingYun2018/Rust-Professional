@@ -12,8 +12,9 @@
 use std::fmt::{self, Display, Formatter};
 
 pub fn is_palindrome(s: String) -> bool {
-    // TODO: Implement the logic to check if the string is a palindrome
-    false // Placeholder return value
+    let s = s.to_lowercase().chars().filter(|c| c.is_alphabetic()).collect::<String>();
+    let ss = s.chars().rev().collect::<String>();
+    s == ss
 }
 
 #[cfg(test)]

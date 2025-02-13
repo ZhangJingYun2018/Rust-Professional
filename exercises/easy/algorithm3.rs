@@ -5,8 +5,24 @@
 */
 
 
-fn sort<T>(array: &mut [T]){
-	//TODO
+fn sort<T>(array: &mut [T]) where T: PartialOrd {
+	//冒泡排序
+    for i in 0..array.len()-1 {
+		for j in 0..array.len()-i-1 {
+			if array[j] > array[j+1] {
+				array.swap(j, j+1);
+			}
+		}
+    }
+
+    // //插入排序
+    // for i in 1..array.len() {
+    //     let mut j = i;
+    //     while j > 0 && array[j-1] > array[j] {
+    //         array.swap(j-1, j);
+    //         j -= 1;
+    //     }
+    // }
 }
 #[cfg(test)]
 mod tests {
